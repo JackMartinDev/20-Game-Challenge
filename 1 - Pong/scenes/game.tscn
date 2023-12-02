@@ -1,0 +1,145 @@
+[gd_scene load_steps=19 format=3 uid="uid://s1iin5ekhgm"]
+
+[ext_resource type="Texture2D" uid="uid://brbneeukuxv3x" path="res://playerSprite.png" id="1_070kr"]
+[ext_resource type="Script" path="res://scenes/game.gd" id="1_ar4ip"]
+[ext_resource type="Script" path="res://scenes/TopWall.gd" id="1_heve3"]
+[ext_resource type="Script" path="res://scenes/Player 1.gd" id="2_jrtnx"]
+[ext_resource type="Script" path="res://scenes/BottomWall.gd" id="3_2asx8"]
+[ext_resource type="Script" path="res://scenes/Player 2.gd" id="3_virps"]
+[ext_resource type="Texture2D" uid="uid://33p82imbvdn4" path="res://divider.png" id="4_mlbbi"]
+[ext_resource type="Texture2D" uid="uid://c3fm4gytam4x8" path="res://ball.png" id="5_flq7c"]
+[ext_resource type="Script" path="res://scenes/Ball.gd" id="5_ri3f4"]
+[ext_resource type="FontFile" uid="uid://dlm4rg31sn466" path="res://Peaberry Base/Peaberry-Base.otf" id="10_57tud"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_mlc7n"]
+size = Vector2(100, 0)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_1q1hc"]
+size = Vector2(1, 10)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_quriq"]
+size = Vector2(1, 10)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_k8ty2"]
+size = Vector2(2, 2)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_xlyf0"]
+size = Vector2(7, 62)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_jesxb"]
+size = Vector2(7, 62)
+
+[sub_resource type="LabelSettings" id="LabelSettings_8ov52"]
+font = ExtResource("10_57tud")
+
+[sub_resource type="LabelSettings" id="LabelSettings_laqtw"]
+font = ExtResource("10_57tud")
+
+[node name="Game" type="Node2D"]
+script = ExtResource("1_ar4ip")
+
+[node name="Timer" type="Timer" parent="."]
+one_shot = true
+
+[node name="TopWall" type="StaticBody2D" parent="."]
+script = ExtResource("1_heve3")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TopWall"]
+position = Vector2(50, 0)
+shape = SubResource("RectangleShape2D_mlc7n")
+metadata/_edit_lock_ = true
+
+[node name="Sprite2D" type="Sprite2D" parent="TopWall"]
+position = Vector2(50, 2.08165e-12)
+rotation = 1.5708
+scale = Vector2(0.5, 9.99811)
+texture = ExtResource("1_070kr")
+metadata/_edit_lock_ = true
+
+[node name="BottomWall" type="StaticBody2D" parent="."]
+position = Vector2(0, 50)
+script = ExtResource("3_2asx8")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BottomWall"]
+position = Vector2(50, 0)
+shape = SubResource("RectangleShape2D_mlc7n")
+metadata/_edit_lock_ = true
+
+[node name="Sprite2D" type="Sprite2D" parent="BottomWall"]
+position = Vector2(50, 2.08165e-12)
+rotation = 1.5708
+scale = Vector2(0.5, 9.99811)
+texture = ExtResource("1_070kr")
+metadata/_edit_lock_ = true
+
+[node name="Player 1" type="CharacterBody2D" parent="."]
+position = Vector2(1, 25)
+script = ExtResource("2_jrtnx")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Player 1"]
+position = Vector2(0.5, 0)
+shape = SubResource("RectangleShape2D_1q1hc")
+metadata/_edit_lock_ = true
+
+[node name="Sprite2D" type="Sprite2D" parent="Player 1"]
+texture = ExtResource("1_070kr")
+metadata/_edit_lock_ = true
+
+[node name="Player 2" type="CharacterBody2D" parent="."]
+position = Vector2(99, 25)
+script = ExtResource("3_virps")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Player 2"]
+position = Vector2(0.5, 0)
+shape = SubResource("RectangleShape2D_quriq")
+metadata/_edit_lock_ = true
+
+[node name="Sprite2D" type="Sprite2D" parent="Player 2"]
+texture = ExtResource("1_070kr")
+metadata/_edit_lock_ = true
+
+[node name="Divider" type="Sprite2D" parent="."]
+position = Vector2(50, 25)
+texture = ExtResource("4_mlbbi")
+
+[node name="Ball" type="Area2D" parent="."]
+position = Vector2(50, 25)
+script = ExtResource("5_ri3f4")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Ball"]
+shape = SubResource("RectangleShape2D_k8ty2")
+metadata/_edit_lock_ = true
+
+[node name="Sprite2D" type="Sprite2D" parent="Ball"]
+texture = ExtResource("5_flq7c")
+metadata/_edit_lock_ = true
+
+[node name="PlayerZones" type="Area2D" parent="."]
+
+[node name="Player 1 Zone" type="CollisionShape2D" parent="PlayerZones"]
+position = Vector2(-10, 25)
+shape = SubResource("RectangleShape2D_xlyf0")
+
+[node name="Player 2 Zone" type="CollisionShape2D" parent="PlayerZones"]
+position = Vector2(110, 25)
+shape = SubResource("RectangleShape2D_jesxb")
+
+[node name="Player 1 Score" type="Label" parent="."]
+offset_left = 21.0
+offset_top = 3.0
+offset_right = 38.0
+offset_bottom = 29.0
+text = "0"
+label_settings = SubResource("LabelSettings_8ov52")
+
+[node name="Player 2 Score" type="Label" parent="."]
+offset_left = 72.0
+offset_top = 2.0
+offset_right = 109.0
+offset_bottom = 28.0
+text = "0"
+label_settings = SubResource("LabelSettings_laqtw")
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
+[connection signal="body_entered" from="Ball" to="Ball" method="_on_body_entered"]
+[connection signal="area_entered" from="PlayerZones" to="." method="_on_player_1_zone_area_entered"]
